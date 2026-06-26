@@ -1,0 +1,864 @@
+/* === نفس الـ CSS السابق بدون تغييرات === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Ravie', 'Geneva', 'Verdana', sans-serif;
+      text-align: center;
+      margin: 0;
+      background: linear-gradient(to right top, #1a1a1a, #2c2c2c);
+      color: hsl(64, 97%, 50%);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+    h1, h2, p {
+      margin: 5px 0;
+    }
+    
+    /* === مستطيل المسار التعليمي - عرض ثابت 61% === */
+    .learning-path-bar {
+      background: #001524;
+      color: #00ffe0;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 255, 224, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 61%;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 8px;
+      animation: glowPath 2s infinite alternate;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 2px solid #00ffe0;
+    }
+    .learning-path-bar h1 {
+      font-size: 1.8rem;
+      margin: 0 0 5px 0;
+      color: #000;
+      text-shadow: 0 0 10px #00ffe0;
+    }
+    .learning-path-bar h2 {
+      font-size: 1.3rem;
+      margin: 0;
+      color: #00ffe0;
+      text-shadow: 0 0 5px #00ffe0;
+    }
+    @keyframes glowPath {
+      from { box-shadow: 0 4px 15px rgba(0, 255, 224, 0.3); }
+      to { box-shadow: 0 4px 25px rgba(0, 255, 224, 0.5); }
+    }
+    
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 20px;
+      min-height: calc(100vh - 200px);
+    }
+    .quiz-box {
+      background-color: hsl(206, 96%, 10%);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(116, 134, 233, 0.2);
+      padding: 25px;
+      width: 90%;
+      max-width: 600px;
+      transition: transform 0.2s;
+      position: relative;
+      margin-top: 0;
+    }
+    .quiz-box:hover {
+      transform: translateY(-5px);
+    }
+    
+    /* === شريط النتيجة === */
+    .score-board {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: linear-gradient(to right, #001524, #002a3f);
+      border: 2px solid #00ffe0;
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 224, 0.4);
+      font-weight: bold;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .score-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #00ffe0;
+      font-size: 0.9rem;
+      flex: 1;
+      min-width: 80px;
+    }
+    .score-item .label {
+      font-size: 0.75rem;
+      color: #888;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .score-item .value {
+      font-size: 1.4rem;
+      color: #00ffe0;
+      text-shadow: 0 0 8px #00ffe0;
+    }
+    .score-item.correct .value { color: #4caf50; text-shadow: 0 0 8px #4caf50; }
+    .score-item.wrong .value { color: #ff5252; text-shadow: 0 0 8px #ff5252; }
+    .score-item.progress .value { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
+
+    /* === شريط التقدم === */
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: #2a2a2a;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      border: 1px solid #00ffe0;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, #00ffe0, #4caf50);
+      width: 0%;
+      transition: width 0.4s ease;
+      box-shadow: 0 0 10px #00ffe0;
+    }
+    
+    /* === زر الاستماع === */
+    .control-btn {
+      padding: 8px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background-color: #00ffe0;
+      color: #000;
+      box-shadow: 0 0 10px #00ffe0;
+    }
+    .control-btn:hover {
+      background-color: #00ccbb;
+      transform: scale(1.05);
+    }
+    
+    /* === الكلمات الناقصة === */
+    .missing-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #3d3d3d;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ffe0;
+    }
+    .word-item {
+      background-color: #32cd32;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: grab;
+      transition: all 0.2s;
+      box-shadow: 0 0 8px rgba(50, 205, 50, 0.5);
+    }
+    .word-item.dragging {
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+    .word-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 12px rgba(50, 205, 50, 0.8);
+    }
+    
+    /* === القطعة النصية === */
+    .text-passage {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #3d3d3d;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ffe0;
+      text-align: justify;
+    }
+    .blank {
+      display: inline-block;
+      min-width: 50px;
+      min-height: 30px;
+      background-color: #ff4d4d;
+      color: white;
+      border-radius: 4px;
+      margin: 0 5px;
+      padding: 5px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+      position: relative;
+    }
+    .blank.filled {
+      background-color: #32cd32;
+      box-shadow: 0 0 10px rgba(50, 205, 50, 0.8);
+    }
+    .blank.correct {
+      background-color: #4CAF50;
+      border: 2px solid #2E7D32;
+      box-shadow: 0 0 20px #4CAF50;
+    }
+    .blank.wrong {
+      background-color: #F44336;
+      border: 2px solid #C62828;
+      box-shadow: 0 0 20px #F44336;
+    }
+    .blank:hover {
+      transform: scale(1.05);
+    }
+    .blank .mic-icon {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: linear-gradient(to right, #ff4081, #e91e63);
+      color: white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+      transition: all 0.3s;
+      z-index: 10;
+    }
+    .blank .mic-icon:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 15px rgba(255, 64, 129, 0.9);
+    }
+    .blank .mic-icon.recording {
+      background: linear-gradient(to right, #f44336, #c62828);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(244, 67, 54, 0.7); }
+      50% { box-shadow: 0 0 25px rgba(255, 0, 0, 0.9); }
+    }
+    
+    /* === زر التحكم - موحد (تصميم ثابت) === */
+    #actionBtn {
+      margin: 25px auto 15px auto;
+      padding: 15px 40px;
+      font-size: 20px;
+      cursor: pointer;
+      background: linear-gradient(to right, #8a2be2, #4b0082);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 0 25px #8a2be2;
+      transition: all 0.3s ease;
+      display: block;
+      width: fit-content;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    #actionBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px #8a2be2;
+    }
+    #actionBtn:active {
+      transform: scale(0.95);
+    }
+    #actionBtn:focus {
+      outline: none;
+      box-shadow: 0 0 40px #8a2be2;
+    }
+    #actionBtn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    /* === رسالة التشجيع للإجابة الصحيحة === */
+    .success-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(76, 175, 80, 0.95);
+      color: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+      z-index: 10002;
+      display: none;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+      animation: bounce 0.5s;
+      border: 3px solid white;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.8); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+    
+    /* === الشاشة العائمة للإجابة الخاطئة === */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      display: none;
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+    }
+    .correct-answer-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(30, 30, 30, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #ff0000;
+      z-index: 10001;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 2px solid #ff0000;
+      max-width: 90%;
+      width: 500px;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .correct-answer-popup h3 {
+      color: #ff0000;
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+    .correct-answer-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 15px 0;
+      width: 100%;
+    }
+    .correct-answer-list li {
+      background-color: #444;
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #00ffe0;
+      box-shadow: 0 0 8px #00ffe0;
+      direction: ltr;
+    }
+    .popup-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .popup-buttons button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 0 12px #00ffe0;
+      transition: all 0.3s;
+      flex: 1;
+      min-width: 100px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .popup-buttons button:hover {
+      transform: scale(1.03);
+    }
+    .popup-buttons button:active {
+      transform: scale(0.98);
+    }
+    #readBtn {
+      background-color: #ff9800;
+      color: #000;
+    }
+    #readBtn:hover {
+      background-color: #ff7043;
+      transform: scale(1.03);
+    }
+    #readBtn:focus {
+      outline: 2px solid #ff9800;
+      outline-offset: 2px;
+    }
+    #gotItBtn {
+      background-color: #00ffe0;
+      color: #000;
+      flex: 1.5;
+      min-width: 120px;
+    }
+    #gotItBtn:hover {
+      background-color: #00ccbb;
+      transform: scale(1.03);
+    }
+    #gotItBtn:focus {
+      outline: 2px solid #00ffe0;
+      outline-offset: 2px;
+    }
+    
+    #footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      padding: 10px;
+      border-top: 1px solid rgba(0, 255, 224, 0.3);
+    }
+    #footer .powered-by {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #00ffe0;
+      margin-bottom: 3px;
+      display: block;
+    }
+    #footer .developer {
+      font-size: 0.85rem;
+      color: #999;
+      display: block;
+    }
+
+    /* ============================== */
+    /* === تصميم شاشة الشهادة === */
+    /* ============================== */
+    #certificateWrapper {
+      display: none;
+      width: 100%;
+      max-width: 700px;
+      margin: 20px auto;
+      animation: fadeInUp 0.8s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .name-input-section {
+      background: linear-gradient(135deg, #001524, #002a3f);
+      border: 2px solid #00ffe0;
+      border-radius: 15px;
+      padding: 30px 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 224, 0.5);
+      text-align: center;
+    }
+    .name-input-section .trophy {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      animation: trophyBounce 1.5s infinite;
+    }
+    @keyframes trophyBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+    .name-input-section h2 {
+      color: #ffd700; font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    }
+    .name-input-section p { color: #00ffe0; font-size: 1.1rem; margin-bottom: 20px; }
+    .final-stats {
+      display: flex; justify-content: space-around;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 10px; padding: 15px;
+      margin: 20px 0; flex-wrap: wrap; gap: 10px;
+    }
+    .final-stat { flex: 1; min-width: 100px; }
+    .final-stat .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; }
+    .final-stat .stat-value { font-size: 1.5rem; font-weight: bold; color: #00ffe0; text-shadow: 0 0 8px #00ffe0; }
+    .final-stat .stat-value.gold { color: #ffd700; text-shadow: 0 0 8px #ffd700; }
+    
+    #studentNameInput {
+      width: 100%; max-width: 400px;
+      padding: 14px 20px; font-size: 1.1rem;
+      text-align: center;
+      background: #1a1a1a; color: #00ffe0;
+      border: 2px solid #00ffe0;
+      border-radius: 10px; outline: none;
+      box-shadow: 0 0 10px rgba(0, 255, 224, 0.3);
+      transition: all 0.3s;
+      margin-bottom: 15px;
+    }
+    #studentNameInput:focus { box-shadow: 0 0 20px rgba(0, 255, 224, 0.7); transform: scale(1.02); }
+    #studentNameInput::placeholder { color: #666; }
+    .generate-btn {
+      padding: 14px 35px; font-size: 1.1rem; font-weight: bold;
+      background: linear-gradient(to right, #ffd700, #ff9800);
+      color: #000; border: none; border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      transition: all 0.3s; margin: 5px;
+    }
+    .generate-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 215, 0, 0.9); }
+    .restart-btn {
+      padding: 14px 35px; font-size: 1.1rem; font-weight: bold;
+      background: linear-gradient(to right, #8a2be2, #4b0082);
+      color: white; border: none; border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+      transition: all 0.3s; margin: 5px;
+    }
+    .restart-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(138, 43, 226, 0.9); }
+
+    /* تصميم الشهادة */
+    .certificate {
+      background: linear-gradient(135deg, #fffdf5, #fff8dc);
+      border: 15px double #d4af37;
+      border-radius: 10px;
+      padding: 40px 30px;
+      position: relative;
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+      color: #2c3e50;
+      font-family: 'Georgia', serif;
+    }
+    .certificate::before, .certificate::after {
+      content: "🏆";
+      position: absolute;
+      font-size: 2rem;
+      top: 15px;
+    }
+    .certificate::before { left: 20px; }
+    .certificate::after { right: 20px; }
+    
+    .certificate-header {
+      border-bottom: 3px double #d4af37;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .certificate-header h1 {
+      color: #b8860b;
+      font-size: 2.5rem;
+      margin: 0;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-family: 'Georgia', serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .certificate-header .subtitle {
+      color: #8b7500; font-size: 1rem;
+      letter-spacing: 5px; margin-top: 5px;
+      text-transform: uppercase;
+    }
+    .certificate-body { padding: 20px 10px; }
+    .certificate-body .certify-text { font-size: 1.1rem; color: #555; margin-bottom: 15px; font-style: italic; }
+    .certificate-body .student-name {
+      font-size: 2.5rem; color: #b8860b;
+      font-family: 'Brush Script MT', cursive;
+      margin: 15px 0;
+      border-bottom: 2px solid #d4af37;
+      display: inline-block;
+      padding: 0 30px 10px;
+      font-weight: bold;
+    }
+    .certificate-body .achievement {
+      font-size: 1.1rem; color: #333;
+      line-height: 1.8; margin: 20px 0;
+    }
+    .certificate-body .achievement strong { color: #b8860b; font-size: 1.3rem; }
+    .grade-badge {
+      display: inline-block;
+      padding: 10px 30px;
+      background: linear-gradient(135deg, #d4af37, #ffd700);
+      color: #000; font-size: 1.5rem; font-weight: bold;
+      border-radius: 30px; margin: 15px 0;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+      letter-spacing: 2px;
+    }
+    .certificate-footer {
+      display: flex; justify-content: space-around;
+      align-items: flex-end;
+      margin-top: 40px; padding-top: 20px;
+      border-top: 2px solid #d4af37;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .signature-block { text-align: center; min-width: 150px; }
+    .signature-block .sig-line {
+      border-top: 2px solid #333;
+      padding-top: 5px;
+      font-size: 0.9rem; color: #555;
+      margin-top: 5px;
+    }
+    .signature-block .sig-name {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.5rem; color: #b8860b;
+      margin-bottom: -5px;
+    }
+    .seal {
+      width: 90px; height: 90px;
+      border: 3px solid #d4af37;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle, #ffd700, #b8860b);
+      color: #fff; font-weight: bold;
+      font-size: 0.75rem; text-align: center;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+      transform: rotate(-15deg);
+      line-height: 1.2; padding: 5px;
+    }
+
+    /* === أزرار الإجراءات === */
+    .certificate-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 14px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: white;
+    }
+    .action-btn:hover { transform: scale(1.05); }
+    .action-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    
+    .save-img-btn {
+      background: linear-gradient(to right, #00b4db, #0083b0);
+      box-shadow: 0 0 20px rgba(0, 180, 219, 0.5);
+    }
+    .save-img-btn:hover { box-shadow: 0 0 30px rgba(0, 180, 219, 0.9); }
+    
+    .whatsapp-btn {
+      background: linear-gradient(to right, #25D366, #128C7E);
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+    }
+    .whatsapp-btn:hover { box-shadow: 0 0 30px rgba(37, 211, 102, 0.9); }
+    
+    .restart-action-btn {
+      background: linear-gradient(to right, #8a2be2, #4b0082);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+    }
+    .restart-action-btn:hover { box-shadow: 0 0 30px rgba(138, 43, 226, 0.9); }
+
+    /* === مؤشر التحميل === */
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 99999;
+      color: #00ffe0;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+    .loading-overlay.show { display: flex; }
+    .spinner {
+      width: 60px; height: 60px;
+      border: 5px solid rgba(0, 255, 224, 0.2);
+      border-top: 5px solid #00ffe0;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* === نقاط كسر إضافية للتوافق مع جميع الشاشات === */
+    @media screen and (max-width: 320px) {
+      .learning-path-bar {
+        width: 90%;
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        border-radius: 6px;
+      }
+      .learning-path-bar h1 {
+        font-size: 1.4rem;
+      }
+      .learning-path-bar h2 {
+        font-size: 1.1rem;
+      }
+      .main-container {
+        padding: 0 10px;
+      }
+      .quiz-box {
+        width: 95%;
+        padding: 15px;
+      }
+      .text-passage {
+        font-size: 1rem;
+      }
+      .word-item {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      .blank {
+        min-width: 40px;
+        min-height: 25px;
+        font-size: 0.9rem;
+      }
+      .blank .mic-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+      }
+      #actionBtn {
+        font-size: 15px;
+        padding: 10px 25px;
+        width: 90%;
+      }
+      .success-message {
+        font-size: 1.2rem;
+        padding: 15px 25px;
+      }
+      .correct-answer-popup {
+        padding: 15px;
+        width: 95%;
+      }
+      .popup-buttons {
+        flex-direction: column;
+      }
+      .popup-buttons button {
+        width: 100%;
+        font-size: 13px;
+        padding: 8px 12px;
+      }
+      .score-item .value { font-size: 1.1rem; }
+      .score-item .label { font-size: 0.65rem; }
+      .certificate { padding: 25px 15px; }
+      .certificate-header h1 { font-size: 1.6rem; }
+      .certificate-body .student-name { font-size: 1.8rem; padding: 0 15px 8px; }
+      .certificate-header .subtitle { font-size: 0.75rem; letter-spacing: 2px; }
+      .grade-badge { font-size: 1.1rem; padding: 8px 20px; }
+      .action-btn { padding: 12px 18px; font-size: 0.9rem; }
+    }
+    
+    @media screen and (min-width: 321px) and (max-width: 480px) {
+      .learning-path-bar {
+        width: 80%;
+        font-size: 1rem;
+        padding: 6px 15px;
+        border-radius: 6px;
+      }
+      .learning-path-bar h1 {
+        font-size: 1.6rem;
+      }
+      .learning-path-bar h2 {
+        font-size: 1.3rem;
+      }
+      .quiz-box {
+        width: 95%;
+        max-width: 95%;
+        margin: 10px auto;
+      }
+      .text-passage {
+        font-size: 1.1rem;
+      }
+      .word-item {
+        padding: 10px 15px;
+        font-size: 1rem;
+      }
+      .blank {
+        min-width: 45px;
+        min-height: 28px;
+        font-size: 1rem;
+      }
+      #actionBtn {
+        font-size: 16px;
+        padding: 12px 30px;
+        width: 80%;
+      }
+      .success-message {
+        font-size: 1.4rem;
+        padding: 20px 30px;
+      }
+      .correct-answer-popup {
+        padding: 20px;
+        width: 90%;
+      }
+      .popup-buttons {
+        flex-direction: column;
+      }
+      .popup-buttons button {
+        width: 100%;
+      }
+      .certificate { padding: 30px 20px; }
+      .certificate-header h1 { font-size: 1.9rem; }
+      .certificate-body .student-name { font-size: 2rem; }
+    }
+    
+    @media screen and (min-width: 481px) {
+      .learning-path-bar {
+        width: 61%;
+      }
+    }
+    
+    /* === تحسينات خاصة لأنظمة التشغيل === */
+    @supports (-webkit-touch-callout: none) {
+      body {
+        -webkit-text-size-adjust: 100%;
+      }
+    }
+    
+    /* === تحسينات الوصول === */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    @media (prefers-contrast: high) {
+      body {
+        background: #000;
+        color: #fff;
+      }
+      .quiz-box {
+        background-color: #222;
+      }
+    }

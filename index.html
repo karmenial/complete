@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>complete</title>
+  
+  <!-- ✅ مكتبة html2canvas لتحويل الشهادة إلى صورة -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  
+<link rel="stylesheet" href="style.css"></head>
+<body>
+
+<div class="main-container" id="gameContainer">
+  <div class="learning-path-bar" aria-label="Learning Path">
+    <h1>Wise Learning</h1>
+    <h2>Complete</h2>
+  </div>
+  
+  <div class="quiz-box" id="quizBox">
+    <!-- === شريط النتيجة === -->
+    <div class="score-board">
+      <div class="score-item progress">
+        <span class="label">السؤال</span>
+        <span class="value"><span id="currentQNum">1</span> / <span id="totalQNum">4</span></span>
+      </div>
+      <div class="score-item correct">
+        <span class="label">✅ صحيح</span>
+        <span class="value" id="correctCount">0</span>
+      </div>
+      <div class="score-item wrong">
+        <span class="label">❌ خطأ</span>
+        <span class="value" id="wrongCount">0</span>
+      </div>
+      <div class="score-item">
+        <span class="label">📊 النسبة</span>
+        <span class="value" id="percentage">0%</span>
+      </div>
+    </div>
+    
+    <!-- === شريط التقدم === -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div style="text-align: left; margin-top: 5px;">
+      <button id="listenBtn" class="control-btn">🔊 Listen</button>
+    </div>
+    
+    <div class="missing-words" id="missingWords"></div>
+    
+    <div class="text-passage" id="textPassage"></div>
+    
+    <button id="actionBtn" onclick="handleAction()">Submit</button>
+    
+    <p id="footer">
+      <span class="powered-by">Powered By Wise Learning</span>
+      <span class="developer">Mr Mohamed Karim</span>
+    </p>
+  </div>
+
+  <!-- === قسم الشهادة === -->
+  <div id="certificateWrapper">
+    <div class="name-input-section" id="nameInputSection">
+      <div class="trophy">🏆</div>
+      <h2>🎉 مبروك! لقد أكملت الاختبار 🎉</h2>
+      <p>أدخل اسمك للحصول على شهادتك</p>
+      
+      <div class="final-stats">
+        <div class="final-stat">
+          <div class="stat-label">النتيجة</div>
+          <div class="stat-value" id="finalScore">0 / 20</div>
+        </div>
+        <div class="final-stat">
+          <div class="stat-label">النسبة</div>
+          <div class="stat-value gold" id="finalPercentage">0%</div>
+        </div>
+        <div class="final-stat">
+          <div class="stat-label">التقدير</div>
+          <div class="stat-value gold" id="finalGrade">-</div>
+        </div>
+      </div>
+      
+      <input type="text" id="studentNameInput" placeholder="✍️ اكتب اسمك هنا..." autocomplete="off">
+      <br>
+      <button class="generate-btn" onclick="generateCertificate()">🎓 إصدار الشهادة</button>
+      <button class="restart-btn" onclick="restartQuiz()">🔄 إعادة الاختبار</button>
+    </div>
+
+    <div id="certificateSection" style="display: none;">
+      <div class="certificate" id="certificateCard">
+        <div class="certificate-header">
+          <h1>شهادة إتمام</h1>
+          <div class="subtitle">Certificate of Completion</div>
+        </div>
+        
+        <div class="certificate-body">
+          <p class="certify-text">تشهد منصة Wise Learning بأن</p>
+          <div class="student-name" id="certName">[اسم الطالب]</div>
+          
+          <p class="achievement">
+            قد أتمّ بنجاح اختبار <strong>إكمال الفراغات (Complete Quiz)</strong>
+            <br>
+            وحقق النتيجة التالية:
+          </p>
+          
+          <div class="grade-badge" id="certGradeBadge">ممتاز</div>
+          
+          <p class="achievement">
+            النتيجة: <strong id="certScore">0 / 20</strong>
+            <br>
+            النسبة المئوية: <strong id="certPercentage">0%</strong>
+          </p>
+        </div>
+        
+        <div class="certificate-footer">
+          <div class="signature-block">
+            <div class="sig-name">Mr Mohamed Karim</div>
+            <div class="sig-line">المدرب / Instructor</div>
+          </div>
+          
+          <div class="seal">
+            WISE<br>LEARNING<br>✓<br><span id="certYear">2026</span>
+          </div>
+          
+          <div class="signature-block">
+            <div class="sig-name" id="certDate">--</div>
+            <div class="sig-line">التاريخ / Date</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="certificate-actions">
+        <button class="action-btn save-img-btn" onclick="saveCertificateAsImage()" id="saveImgBtn">
+          🖼️ حفظ كصورة
+        </button>
+        <button class="action-btn whatsapp-btn" onclick="sendToWhatsApp()" id="whatsappBtn">
+          📱 إرسال واتساب
+        </button>
+        <button class="action-btn restart-action-btn" onclick="restartQuiz()">
+          🔄 اختبار جديد
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === مؤشر التحميل === -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div id="loadingText">جاري تجهيز الشهادة...</div>
+</div>
+
+<div class="success-message" id="successMessage" role="alert" aria-live="assertive">
+  🎉 Excellent! Correct Answer! 🎉
+</div>
+
+<div class="popup-overlay" id="correctAnswerOverlay" onclick="closeCorrectAnswerPopup()" aria-hidden="true"></div>
+<div class="correct-answer-popup" id="correctAnswerPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-hidden="true">
+  <h3 id="popupTitle">Correct Answer:</h3>
+  <ul class="correct-answer-list" id="correctAnswerList"></ul>
+  <div class="popup-buttons">
+    <button id="readBtn" onclick="readCorrectAnswer()" aria-label="Read correct answer">🔊 Read</button>
+    <button id="gotItBtn" onclick="closeCorrectAnswerPopup()" aria-label="Got it">Got it</button>
+  </div>
+</div>
+
+
+
+<script src="app.js" defer=""></script></body></html>
