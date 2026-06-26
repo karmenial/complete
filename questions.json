@@ -1,74 +1,46 @@
 [
-    {
-        "passage": "My name is Ahmed. I live in {blank1}. I am {blank2} years old. I study at {blank3} school. My favorite subject is {blank4}. I like to play {blank5}.",
-        "options": [
-            "Cairo",
-            "12",
-            "Al-Nasr",
-            "Math",
-            "football"
-        ],
-        "correctAnswer": [
-            "Cairo",
-            "12",
-            "Al-Nasr",
-            "Math",
-            "football"
-        ],
-        "reason": "Complete the passage with the correct words in order."
-    },
-    {
-        "passage": "Yesterday was a {blank1} day. The {blank2} was shining. I went to the {blank3} with my {blank4}. We bought some {blank5}.",
-        "options": [
-            "beautiful",
-            "sun",
-            "market",
-            "friend",
-            "fruits"
-        ],
-        "correctAnswer": [
-            "beautiful",
-            "sun",
-            "market",
-            "friend",
-            "fruits"
-        ],
-        "reason": "Choose the appropriate words to complete the story."
-    },
-    {
-        "passage": "The {blank1} is very {blank2} today. I can see many {blank3} in the sky. My {blank4} and I will go to the {blank5} later.",
-        "options": [
-            "weather",
-            "nice",
-            "birds",
-            "mother",
-            "park"
-        ],
-        "correctAnswer": [
-            "weather",
-            "nice",
-            "birds",
-            "mother",
-            "park"
-        ],
-        "reason": "Fill in the blanks with suitable words about the weather and activities."
-    },
-    {
-        "passage": "I have a {blank1} cat. Its name is {blank2}. It likes to eat {blank3} and {blank4}. Sometimes it sleeps on my {blank5}.",
-        "options": [
-            "small",
-            "Mimi",
-            "fish",
-            "milk",
-            "bed"
-        ],
-        "correctAnswer": [
-            "small",
-            "Mimi",
-            "fish",
-            "milk",
-            "bed"
-        ],
-        "reason": "Complete the description of the cat with the correct words."
-    }
+  {
+    "level": "primary",
+    "grade": "3",
+    "curriculum": "AL",
+    "unit": "1",
+    "lessonTitle": "Connect Plus: Welcome Unit",
+    "passage": "My name is Ahmed. I live in {blank1}. I am {blank2} years old. I study at {blank3} school. My favorite subject is {blank4}. I like to play {blank5}.",
+    "options": ["Cairo", "12", "Al-Nasr", "Math", "football"],
+    "correctAnswer": ["Cairo", "12", "Al-Nasr", "Math", "football"],
+    "reason": "Complete the passage with the correct words in order."
+  },
+  {
+    "level": "primary",
+    "grade": "3",
+    "curriculum": "AL",
+    "unit": "1",
+    "lessonTitle": "Connect Plus: Welcome Unit",
+    "passage": "Yesterday was a {blank1} day. The {blank2} was shining. I went to the {blank3} with my {blank4}. We bought some {blank5}.",
+    "options": ["beautiful", "sun", "market", "friend", "fruits"],
+    "correctAnswer": ["beautiful", "sun", "market", "friend", "fruits"],
+    "reason": "Choose the appropriate words to complete the story."
+  },
+  {
+    "level": "primary",
+    "grade": "3",
+    "curriculum": "AL",
+    "unit": "1",
+    "lessonTitle": "Connect Plus: Welcome Unit",
+    "passage": "The {blank1} is very {blank2} today. I can see many {blank3} in the sky. My {blank4} and I will go to the {blank5} later.",
+    "options": ["weather", "nice", "birds", "mother", "park"],
+    "correctAnswer": ["weather", "nice", "birds", "mother", "park"],
+    "reason": "Fill in the blanks with suitable words about the weather and activities."
+  },
+  {
+    "level": "primary",
+    "grade": "3",
+    "curriculum": "AL",
+    "unit": "1",
+    "lessonTitle": "Connect Plus: Welcome Unit",
+    "passage": "I have a {blank1} cat. Its name is {blank2}. It likes to eat {blank3} and {blank4}. Sometimes it sleeps on my {blank5}.",
+    "options": ["small", "Mimi", "fish", "milk", "bed"],
+    "correctAnswer": ["small", "Mimi", "fish", "milk", "bed"],
+    "reason": "Fill in the blanks with suitable words about a pet cat."
+  }
 ]
